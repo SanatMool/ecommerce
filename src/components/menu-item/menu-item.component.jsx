@@ -1,6 +1,6 @@
 import React from "react";
 
-//With Router higher component, takes in any component and modifies it and return it
+//withRouter is Higher Order Component (HOC), takes in any component and modifies it then, return it
 import { withRouter } from "react-router-dom";
 
 import "./menu-item.styles.scss";
