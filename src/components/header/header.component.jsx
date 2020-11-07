@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// connect let's us modify our component to have access to things related to redux
 import { connect } from "react-redux";
 
 import { auth } from "../../firebase/firebase.utils";
@@ -33,9 +34,10 @@ const Header = ({ currentUser }) => (
 );
 
 //state is root reducer
-//connect (map, dispatch)
 const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
 });
 
+// connect (mapStateToProps, mapDispatchToProps) is higher order component,
+// higher order component (HOC) is a function that takes component as arguments and return new component
 export default connect(mapStateToProps)(Header);
