@@ -38,7 +38,9 @@ const Header = ({ currentUser, hidden }) => (
   </div>
 );
 
-//state is root reducer
+//state is root reducer.... mapStateToProps(state => ())
+//destructuring the state/root reducer ---> user, cart
+//mapStateToProps = ({ user is userReducer --> access the INITIAL_STATE, cart is cartReducer --> access the INITIAL_STATE})
 const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
   currentUser,
   hidden,

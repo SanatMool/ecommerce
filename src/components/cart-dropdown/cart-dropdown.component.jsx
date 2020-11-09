@@ -17,6 +17,9 @@ const CartDropdown = ({ cartItems }) => (
   </div>
 );
 
+//state is root reducer.... mapStateToProps(state => ())
+//destructuring the state/root reducer ---> cart
+//mapStateToProps = ({ cart is cartReducer --> access the INITIAL_STATE})
 const mapStateToProps = ({ cart: { cartItems } }) => ({
   cartItems,
 });
