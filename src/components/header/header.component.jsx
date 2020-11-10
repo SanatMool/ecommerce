@@ -3,9 +3,15 @@ import { Link } from "react-router-dom";
 // connect let's us modify our component to have access to things related to redux
 import { connect } from "react-redux";
 
+//automatically pass top level state that we get as mapStateToProps
+import { createStructuredSelector } from "reselect";
+
 import { auth } from "../../firebase/firebase.utils";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
+
+import { selectCartHidden } from "../../redux/cart/cart.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
@@ -41,11 +47,14 @@ const Header = ({ currentUser, hidden }) => (
 //state is root reducer.... mapStateToProps(state => ())
 //destructuring the state/root reducer ---> user, cart
 //mapStateToProps = ({ user is userReducer --> access the INITIAL_STATE, cart is cartReducer --> access the INITIAL_STATE})
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser,
-  hidden,
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden,
 });
 
 // connect (mapStateToProps, mapDispatchToProps) is higher order component,
 // higher order component (HOC) is a function that takes component as arguments and return new component
+
+// if second parameter (disptach) is not passed in connect
+// connect will pass dispatch as props in component
 export default connect(mapStateToProps)(Header);

@@ -36,4 +36,6 @@ const mapDispatchToProps = (dispatch) => ({
   addItem: (item) => dispatch(addItem(item)),
 });
 
+// if second parameter (disptach) is not passed in connect
+// connect will pass dispatch as props in component
 export default connect(null, mapDispatchToProps)(CollectionItem);
