@@ -5,6 +5,7 @@ import { persistStore } from "redux-persist";
 import logger from "redux-logger";
 // all thunks are, is a action creator that returns a function that gets the dispatch
 // similar to mapDispatchToProps
+// redux-thunk ignores action object, only catches functions and allows dispatch to be used
 import thunk from "redux-thunk";
 
 import rootReducer from "./root-reducer";
