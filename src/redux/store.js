@@ -3,10 +3,13 @@ import { createStore, applyMiddleware } from "redux";
 import { persistStore } from "redux-persist";
 
 import logger from "redux-logger";
+// all thunks are, is a action creator that returns a function that gets the dispatch
+// similar to mapDispatchToProps
+import thunk from "redux-thunk";
 
 import rootReducer from "./root-reducer";
 
-const middlewares = [];
+const middlewares = [thunk];
 
 // create-react-app gives access to process.env.NODE_ENV
 if (process.env.NODE_ENV === "development") {
