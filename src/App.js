@@ -10,7 +10,7 @@ import "./App.css";
 import {
   auth,
   createUserProfileDocument,
-  addCollectionAndDocuments,
+  // addCollectionAndDocuments,
 } from "./firebase/firebase.utils";
 
 import { selectCurrentUser } from "./redux/user/user.selectors";
