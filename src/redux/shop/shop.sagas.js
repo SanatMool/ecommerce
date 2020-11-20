@@ -2,7 +2,9 @@
 // call is the code / effect inside of the generator function that invokes the method
 // put is the saga effect for creating action
 // takeLatest fires only the latest call
-import { takeEvery, takeLatest, call, put, all } from "redux-saga/effects";
+
+// import { takeEvery } from "redux-saga/effects";
+import { takeLatest, call, put, all } from "redux-saga/effects";
 
 import {
   convertCollectionsSnapshotToMap,

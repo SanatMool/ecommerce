@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 // connect let's us modify our component to have access to things related to redux
@@ -24,65 +24,67 @@ import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up
 import CheckoutPage from "./pages/checkout/checkout.component";
 import { checkUserSession } from "./redux/user/user.actions";
 
-class App extends React.Component {
-  unsubscribeFromAuth = null;
+const App = ({ checkUserSession, currentUser }) => {
+  // -------------replaced by useEffect hook
+  // unsubscribeFromAuth = null;
 
-  componentDidMount() {
-    //----------------replaced by saga
-    // const { setCurrentUser } = this.props;
-    // method takes parameter as user
-    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-    //   if (userAuth) {
-    //     const userRef = await createUserProfileDocument(userAuth);
-    //     userRef.onSnapshot((snapShot) => {
-    //       setCurrentUser({
-    //         id: snapShot.id,
-    //         ...snapShot.data(),
-    //       });
-    //     });
-    //   }
-    //   setCurrentUser(userAuth);
-    // addCollectionAndDocuments(
-    //   "collections",
-    //   collectionsArray.map(({ title, items }) => ({ title, items }))
-    // );
-    // });
-
-    const { checkUserSession } = this.props;
-
+  useEffect(() => {
     checkUserSession();
-  }
+  }, [checkUserSession]);
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+  // -------------replaced by useEffect hook
+  // componentDidMount() {
+  // -------------replaced by useEffect hook
+  // const { checkUserSession } = this.props;
 
-  render() {
-    return (
-      <div>
-        <Header />
-        {/* switch will match slash first and not render anything after it  */}
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route exact path="/checkout" component={CheckoutPage} />
+  // checkUserSession();
 
-          <Route
-            exact
-            path="/signin"
-            render={() =>
-              this.props.currentUser ? (
-                <Redirect to="/" />
-              ) : (
-                <SignInAndSignUpPage />
-              )
-            }
-          />
-        </Switch>
-      </div>
-    );
-  }
-}
+  //----------------replaced by saga
+  // const { setCurrentUser } = this.props;
+  // method takes parameter as user
+  // this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+  //   if (userAuth) {
+  //     const userRef = await createUserProfileDocument(userAuth);
+  //     userRef.onSnapshot((snapShot) => {
+  //       setCurrentUser({
+  //         id: snapShot.id,
+  //         ...snapShot.data(),
+  //       });
+  //     });
+  //   }
+  //   setCurrentUser(userAuth);
+  // addCollectionAndDocuments(
+  //   "collections",
+  //   collectionsArray.map(({ title, items }) => ({ title, items }))
+  // );
+  // });
+  // }
+
+  // -------------replaced by useEffect hook
+  // componentWillUnmount() {
+  //   this.unsubscribeFromAuth();
+  // }
+
+  return (
+    <div>
+      <Header />
+      {/* switch will match slash first and not render anything after it  */}
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/shop" component={ShopPage} />
+        <Route exact path="/checkout" component={CheckoutPage} />
+
+        <Route
+          exact
+          path="/signin"
+          render={() =>
+            currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
+          }
+        />
+      </Switch>
+    </div>
+  );
+};
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
